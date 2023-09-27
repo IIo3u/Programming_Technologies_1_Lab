@@ -1,21 +1,22 @@
 #include <iostream>		// ({[]})
-						// ([]}{)
+// ([]}{)
 
 using namespace std;
 
-template<typename SomeType> 
-struct List 
+template<typename SomeType>
+struct List
 {
 public:
 
 	List();
 	void add(SomeType data);
 	int get_size() { return NodeCounter; };
+	SomeType& operator[](int index);
 
 private:
 
 	template<typename SomeType>
-	class Node 
+	class Node
 	{
 	public:
 		Node* NextAddress;
@@ -26,10 +27,11 @@ private:
 			this->data = data;
 			this->NextAddress = NextP;
 		}
-	
+
 	};
 
 	Node<SomeType>* Head;
+	/*Node<SomeType>* Tail;*/
 	int NodeCounter;
 };
 
@@ -41,7 +43,7 @@ List<SomeType>::List()
 };
 
 template<typename SomeType>
-void List<SomeType>::add(SomeType data) 
+void List<SomeType>::add(SomeType data)
 {
 	if (Head == nullptr)
 	{
@@ -50,22 +52,46 @@ void List<SomeType>::add(SomeType data)
 	else
 	{
 		Node<SomeType>* Current = this->Head;
-		while (Current -> NextAddress != nullptr) 
+		while (Current->NextAddress != nullptr)
 		{
 			Current = Current->NextAddress;
 		}
 		Current->NextAddress = new Node<SomeType>(data);
+
+		/*Tail = Current->NextAddress;*/
 	}
 	NodeCounter++;
 }
 
+template<typename SomeType>
+SomeType& List<SomeType>::operator[](int index) 
+{
+	int counter = 0;
+	Node<SomeType>* Current = this->Head;
+	while (Current != nullptr) 
+	{
+		if (counter == index) 
+		{
+			return Current->data;
+		}
+		Current = Current->NextAddress;
+		counter++;
+	}
+ };
 
-
-void main() 
+void main()
 {
 	List<int> lst;
 	lst.add(6);
 	lst.add(7);
-	cout << lst.get_size();
-	
+	lst.add(7);
+	lst.add(8);
+	lst.add(9);
+	lst.add(10);
+	lst.add(11);
+	for (int i = 0; i < lst.get_size(); i++) 
+	{
+		cout << lst[i] << endl;
+	}
+
 }
