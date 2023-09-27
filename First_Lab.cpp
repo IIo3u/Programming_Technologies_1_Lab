@@ -18,13 +18,15 @@ private:
 	class Node 
 	{
 	public:
+		Node* PreviousAddress;
 		Node* NextAddress;
 		SomeType data;
 
-		Node(SomeType data = SomeType(), Node* NextP = nullptr)
+		Node(SomeType data = SomeType(), Node* NextAddress = nullptr, Node* PreviousAddress = nullptr)
 		{
 			this->data = data;
-			this->NextAddress = NextP;
+			this->NextAddress = NextAddress;
+			this->PreviousAddress = PreviousAddress;
 		}
 	
 	};
@@ -50,11 +52,13 @@ void List<SomeType>::add(SomeType data)
 	else
 	{
 		Node<SomeType>* Current = this->Head;
+		Node<SomeType>* Previous = nullptr;
 		while (Current -> NextAddress != nullptr) 
 		{
+			Previous = Current;
 			Current = Current->NextAddress;
 		}
-		Current->NextAddress = new Node<SomeType>(data);
+		Current->NextAddress = new Node<SomeType>(data, nullptr, Previous);
 	}
 	NodeCounter++;
 }
