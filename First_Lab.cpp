@@ -394,7 +394,7 @@ int main()
 	}
 	cout << endl;
 
-	if (DefineSequence(firstStroke) == true)
+	if ((DefineSequence(firstStroke) == true) && firstStroke.get_size() != 0)
 	{
 		cout << "True expression" << endl;
 	}
