@@ -35,7 +35,7 @@ public:
 	void pop_element(Node<SomeType>* data);
 	void pop_low();
 	void pop_top();
-	void add_back(SomeType data);
+	void append(SomeType data);
 	void add_front(SomeType data);
 	SomeType& get_low();
 	SomeType& get_top();
@@ -61,7 +61,7 @@ void List<SomeType>::add_first(SomeType data)
 }
 
 template<typename SomeType>
-void List<SomeType>::add_back(SomeType data)
+void List<SomeType>::append(SomeType data)
 {
 	if (data != NULL)
 	{
@@ -249,7 +249,7 @@ List<SomeType>& Copy(List<SomeType>* OldList)
 	List<SomeType>* NewList = new List<SomeType>;
 	for (int i = 0; i < OldList.get_size(); i++)
 	{
-		NewList->add_back(OldList.get_low());
+		NewList->append(OldList.get_low());
 	}
 }
 
@@ -278,7 +278,7 @@ bool DefineSequence(List<SomeType> Sequence)
 	{
 		if ((Sequence[i] == '(') || (Sequence[i] == '{') || (Sequence[i] == '['))
 		{
-			Stack->add_back(Sequence[i]);
+			Stack->append(Sequence[i]);
 		}
 		else
 		{
@@ -310,7 +310,7 @@ int main()
 	{
 		if (buffer != '\n')
 		{
-			firstStroke.add_back(buffer);
+			firstStroke.append(buffer);
 		}
 		else
 		{
