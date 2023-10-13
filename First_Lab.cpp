@@ -2,7 +2,6 @@
 #include <iostream>
 
 using namespace std;
-
 template<typename SomeType>
 class List
 {
@@ -10,9 +9,9 @@ private:
 	template<typename SomeType>
 	class Node
 	{
-	public:
-		Node* PreviousAddress;
-		Node* NextAddress;
+	public:						// Если выложить все ячейки по адресам слева на право, то:
+		Node* PreviousAddress;  // Это ссылка влево (т.е. ведёт в начало списка)
+		Node* NextAddress;		// Это ссылка вправо (т.е. ведёт в конец списка)
 		SomeType data;
 
 		Node(SomeType data = SomeType())
@@ -23,29 +22,30 @@ private:
 	};
 
 
-	Node<SomeType>* Head;
-	Node<SomeType>* Tail;
+	Node<SomeType>* Head;	// Начало
+	Node<SomeType>* Tail; // Конец
 	int Size;
-	void add_first(SomeType data);
+	void add_first(SomeType data);	// Инициализирует добавление первого элемента
 
 public:
 
 	List();
 
-	void add_on_pos_right(int index, SomeType data);
-	void add_on_pos_left(int index, SomeType data);
-	void append(SomeType data);
-	void add_front(SomeType data);
-	void pop_element(int index);
-	void pop_top();
-	void pop_low();
-	SomeType& get_low();
-	SomeType& get_top();
-	int get_size() { return Size; };
-	SomeType& operator[](int index);
+	void add_on_pos_right(int index, SomeType data); // Добавляет значение справа
+	void add_on_pos_left(int index, SomeType data);	 // Добавляет значение слева
+	void append(SomeType data);						 // Добавляет значение правее последнего элемента (в конец списка)
+	void add_front(SomeType data);					 // Добавляет значение левее первого элемента (в начало списка)
+	void pop_element(int index);					 // Удаляет элемент по нужному адресу
+	void pop_top();									 // Удаляет Начальный (Head) элемент списка
+	void pop_low();									 // Удаляет Конечный (Tail) элемент списка
+	SomeType& get_low();							 // Передаёт ссылку на поле data Конечного элемента
+	SomeType& get_top();							 // Передаёт ссылку на поле data Начального элемента
+	int get_size() { return Size; };				 // Возвращает размер списка
+	SomeType& operator[](int index);				 // Оператор индексирования для обращения к полю data нужных элементов
 
 
 };
+
 template<typename SomeType>
 void List<SomeType>::add_first(SomeType data)
 {
